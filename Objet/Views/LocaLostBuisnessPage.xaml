@@ -7,109 +7,25 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:vm="clr-namespace:Objet.ViewModels"
     xmlns:local="clr-namespace:Objet.Views"
-       xmlns:m="clr-namespace:objet.Context.Models;assembly=objet.Context"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:m="clr-namespace:objet.Context.Models;assembly=objet.Context"
     x:DataType="vm:LocaLostBuisnessViewModel"
     mc:Ignorable="d">
-    <ScrollView>
-        <StackLayout Padding="20" Spacing="20">
 
-            <!-- Section Lieu -->
-            <Label Text="Gestion des Lieux"
-                   FontSize="24"
-                   TextColor="Black"
-                   HorizontalOptions="Center" />
+    <StackLayout Padding="20" Spacing="20">
+        
+        <!-- Data entry fields for the rest of Lieu details -->
+        <Entry Text="{Binding SelectedLieu.Nom, Mode=TwoWay}" Placeholder="Nom du lieu"/>
+        <Entry Text="{Binding SelectedLieu.Description, Mode=TwoWay}" Placeholder="Description"/>
+        <Entry Text="{Binding SelectedLieu.Latitude, Mode=TwoWay}" Placeholder="Latitude"/>
+        <Entry Text="{Binding SelectedLieu.Longitude, Mode=TwoWay}" Placeholder="Longitude"/>
 
-            <Entry Placeholder="Nom du lieu" 
-                   x:Name="NomLieuEntry" />
+        <Picker Title="Select a monkey"
+        ItemsSource="{Binding Monkeys}"
+        ItemDisplayBinding="{Binding Name}"
+        SelectedItem="{Binding SelectedMonkey}" />
 
-            <Editor Placeholder="Description du lieu" 
-                    x:Name="DescriptionLieuEditor" 
-                    HeightRequest="100" />
+        <Button Text="Save Lieu" Command="{Binding SaveLieuAsync}" />
 
-            <Entry Placeholder="Coordonnées GPS (latitude, longitude)" 
-                   x:Name="CoordonneesGpsEntry" />
-
-            <Picker Title="Sélectionnez une entreprise" 
-                    x:Name="EntreprisePicker">
-                <!-- Remplissez la liste des entreprises ici -->
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Entreprise 1</x:String>
-                        <x:String>Entreprise 2</x:String>
-                        <x:String>Entreprise 3</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-
-            <Button Text="Créer / Modifier Lieu" 
-                    BackgroundColor="LightBlue" 
-                    TextColor="White" 
-                    Command="{Binding SaveLieuCommand}" />
-
-            <!-- Section Objets Trouvés -->
-            <Label Text="Gestion des Objets Trouvés"
-                   FontSize="24"
-                   TextColor="Black"
-                   HorizontalOptions="Center"
-                   Margin="20,40,20,0" />
-
-            <!-- Date de découverte -->
-            <Label Text="Date de découverte" />
-            <DatePicker x:Name="DateDecouvertePicker"
-                        Date="{Binding DateDecouverte}"
-                        Format="D" />
-
-            <!-- Heure de découverte -->
-            <Label Text="Heure de découverte" />
-            <TimePicker x:Name="HeureDecouvertePicker"
-                        Time="{Binding HeureDecouverte}" />
-
-            <!-- Catégorie de l'objet -->
-            <Picker Title="Catégorie de l'objet" 
-                    x:Name="CategorieObjetPicker">
-                <!-- Remplissez la liste des catégories ici -->
-                <Picker.ItemsSource>
-                    <x:Array Type="{x:Type x:String}">
-                        <x:String>Téléphone</x:String>
-                        <x:String>Montre</x:String>
-                        <x:String>Clé</x:String>
-                        <x:String>Sac à main</x:String>
-                        <x:String>Portefeuille</x:String>
-                        <x:String>Papier d'identité</x:String>
-                        <x:String>Valise</x:String>
-                        <x:String>Lunettes</x:String>
-                    </x:Array>
-                </Picker.ItemsSource>
-            </Picker>
-
-            <!-- Nom de l'objet -->
-            <Entry Placeholder="Nom de l'objet (ex : Téléphone Xiaomi)" 
-                   x:Name="NomObjetEntry" />
-
-            <!-- Numéro de l'objet -->
-            <Entry Placeholder="Numéro (code barre, IMEI, etc.)" 
-                   x:Name="NumeroObjetEntry" />
-
-            <!-- Couleur principale de l'objet -->
-            <Entry Placeholder="Couleur principale de l'objet" 
-                   x:Name="CouleurObjetEntry" />
-
-            <!-- Description de l'objet -->
-            <Editor Placeholder="Description de l'objet (facultatif)" 
-                    x:Name="DescriptionObjetEditor" 
-                    HeightRequest="100" />
-
-            <!-- Boutons de gestion des objets trouvés -->
-            <Button Text="Créer / Modifier Objet Trouvé"
-                    BackgroundColor="LightGreen" 
-                    TextColor="White" 
-                    Command="{Binding SaveObjetCommand}" />
-
-            <Button Text="Supprimer Objet"
-                    BackgroundColor="LightCoral"
-                    TextColor="White"
-                    Command="{Binding DeleteObjetCommand}" />
-
-        </StackLayout>
-    </ScrollView>
+    </StackLayout>
 </ContentPage>

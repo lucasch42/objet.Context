@@ -1,53 +1,45 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using objet.Context.Models;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
-using System.ComponentModel;
-using System.Windows.Input;
+using System.Collections.ObjectModel;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Objet.ViewModels
 {
-    public class LocaLostBuisnessViewModel : BaseViewModel
+    public partial class LocaLostBuisnessViewModel : BaseViewModel
     {
-        public string NomLieu { get; set; }
-        public string DescriptionLieu { get; set; }
-        public string CoordonneesGps { get; set; }
-        public string SelectedEntreprise { get; set; }
+        [ObservableProperty]
+        private Lieu selectedLieu = new Lieu();
 
-        public DateTime DateDecouverte { get; set; } = DateTime.Now;
-        public TimeSpan HeureDecouverte { get; set; } = DateTime.Now.TimeOfDay;
-        public string SelectedCategorieObjet { get; set; }
-        public string NomObjet { get; set; }
-        public string NumeroObjet { get; set; }
-        public string CouleurObjet { get; set; }
-        public string DescriptionObjet { get; set; }
-
-        public ICommand SaveLieuCommand { get; }
-        public ICommand SaveObjetCommand { get; }
-        public ICommand DeleteObjetCommand { get; }
+        public ObservableCollection<Entreprise> Entreprises { get; set; } = new ObservableCollection<Entreprise>();
 
         public LocaLostBuisnessViewModel(IDialogService dialogService, INavigationService navigationService)
             : base(dialogService, navigationService)
         {
-            SaveLieuCommand = new Command(SaveLieu);
-            SaveObjetCommand = new Command(SaveObjet);
-            DeleteObjetCommand = new Command(DeleteObjet);
+            LoadEntreprisesAsync();
+            SelectedLieu = new Lieu(); // Initialize a new Lieu or fetch an existing one depending on your app's flow
         }
 
-        private void SaveLieu()
+        private async void LoadEntreprisesAsync()
         {
-            // Logique pour sauvegarder ou modifier le lieu
-            Console.WriteLine("Lieu enregistré : " + NomLieu);
+            var entreprises = await DbContext.Entreprises.ToListAsync();
+            Entreprises = new ObservableCollection<Entreprise>(entreprises);
         }
 
-        private void SaveObjet()
+        [RelayCommand]
+        public async Task SaveLieuAsync()
         {
-            // Logique pour sauvegarder ou modifier l'objet trouvé
-            Console.WriteLine("Objet trouvé enregistré : " + NomObjet);
-        }
+            if (SelectedLieu.Lieuxid == 0)
+            {
+                DbContext.Lieus.Add(SelectedLieu);
+            }
+            else
+            {
+                DbContext.Lieus.Update(SelectedLieu);
+            }
 
-        private void DeleteObjet()
-        {
-            // Logique pour supprimer l'objet trouvé
-            Console.WriteLine("Objet trouvé supprimé");
+            await DbContext.SaveChangesAsync();
         }
     }
 }
