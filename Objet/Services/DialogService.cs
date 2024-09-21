@@ -12,7 +12,7 @@
             return Shell.Current.DisplayAlert(title, message, cancel);
         }
 
-        public Task DisplayAlertAsync(string title, string message, string accept, string cancel)
+        public Task<bool> DisplayAlertAsync(string title, string message, string accept, string cancel)
         {
             if (Shell.Current is null)
             {

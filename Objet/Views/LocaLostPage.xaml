@@ -47,8 +47,8 @@
                 <Button Text="Vous avez trouvé un objet perdu ?"
                         WidthRequest="350"
                         BackgroundColor="LightGreen"
-                        TextColor="red" 
-                       Command="{Binding }"/>
+                        TextColor="White" 
+                       Command="{Binding ConnexionBuisnessAsyncCommand}"/>
             </StackLayout>
 
         </StackLayout>
@@ -58,7 +58,7 @@
             WidthRequest="350"
             BackgroundColor="LightBlue"
             TextColor="White" 
-          Clicked="OnQuitterButtonClicked"/>
+          Command="{Binding QuitterCommand}"/>
         </StackLayout>
 
     </StackLayout>

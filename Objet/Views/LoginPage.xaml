@@ -16,7 +16,6 @@
             VerticalOptions="Center">
             <Button
                 Command="{x:Bind LoginCommand}"
-                Style="{StaticResource PrimaryAction}"
                 Text="Login" />
         </StackLayout>
     </ContentPage.Content>

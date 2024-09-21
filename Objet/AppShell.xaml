@@ -34,10 +34,8 @@
     <FlyoutItem Title="Calendar">
         <ShellContent
            ContentTemplate="{DataTemplate vw:LocaLostBuisnessPage}"
-           Route="test" /> 
+           Route="test" />
     </FlyoutItem>
-    
-   
     <FlyoutItem Title="Search">
         <ShellContent
             ContentTemplate="{DataTemplate vw:SearchPage}"

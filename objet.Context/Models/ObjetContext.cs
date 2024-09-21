@@ -35,7 +35,7 @@ public partial class ObjetContext : DbContext
     {
         modelBuilder.Entity<Categorie>(entity =>
         {
-            entity.HasKey(e => e.Categorieid).HasName("PK__Categori__60A18CB429726F68");
+            entity.HasKey(e => e.Categorieid).HasName("PK__Categori__60A18CB46FAA8951");
 
             entity.ToTable("Categorie");
 
@@ -48,7 +48,7 @@ public partial class ObjetContext : DbContext
 
         modelBuilder.Entity<Entreprise>(entity =>
         {
-            entity.HasKey(e => e.Entrepriseid).HasName("PK__Entrepri__A554B45F5830D801");
+            entity.HasKey(e => e.Entrepriseid).HasName("PK__Entrepri__A554B45F7FE5CF6C");
 
             entity.ToTable("Entreprise");
 
@@ -85,7 +85,7 @@ public partial class ObjetContext : DbContext
 
         modelBuilder.Entity<Lieu>(entity =>
         {
-            entity.HasKey(e => e.Lieuxid).HasName("PK__Lieu__B24E845415C2D9FF");
+            entity.HasKey(e => e.Lieuxid).HasName("PK__Lieu__B24E8454B2AB9823");
 
             entity.ToTable("Lieu");
 
@@ -105,12 +105,12 @@ public partial class ObjetContext : DbContext
             entity.HasOne(d => d.Entreprise).WithMany(p => p.Lieus)
                 .HasForeignKey(d => d.Entrepriseid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Lieu__entreprise__3A81B327");
+                .HasConstraintName("FK__Lieu__entreprise__398D8EEE");
         });
 
         modelBuilder.Entity<ObjetTrouve>(entity =>
         {
-            entity.HasKey(e => e.Objetid).HasName("PK__ObjetTro__0A1B7B6FC4CD2567");
+            entity.HasKey(e => e.Objetid).HasName("PK__ObjetTro__0A1B7B6FD47AAC45");
 
             entity.ToTable("ObjetTrouve");
 
@@ -120,7 +120,9 @@ public partial class ObjetContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("couleur");
-            entity.Property(e => e.Datedecouverte).HasColumnName("datedecouverte");
+            entity.Property(e => e.Datedecouverte)
+                .HasColumnType("datetime")
+                .HasColumnName("datedecouverte");
             entity.Property(e => e.Description)
                 .HasMaxLength(50)
                 .IsUnicode(false)
@@ -140,27 +142,27 @@ public partial class ObjetContext : DbContext
             entity.HasOne(d => d.Categorie).WithMany(p => p.ObjetTrouves)
                 .HasForeignKey(d => d.Categorieid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ObjetTrou__categ__44FF419A");
+                .HasConstraintName("FK__ObjetTrou__categ__440B1D61");
 
             entity.HasOne(d => d.Lieux).WithMany(p => p.ObjetTrouves)
                 .HasForeignKey(d => d.Lieuxid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ObjetTrou__lieux__45F365D3");
+                .HasConstraintName("FK__ObjetTrou__lieux__44FF419A");
 
             entity.HasOne(d => d.Salarie).WithMany(p => p.ObjetTrouves)
                 .HasForeignKey(d => d.Salarieid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ObjetTrou__salar__440B1D61");
+                .HasConstraintName("FK__ObjetTrou__salar__4316F928");
 
             entity.HasOne(d => d.Usager).WithMany(p => p.ObjetTrouves)
                 .HasForeignKey(d => d.Usagerid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__ObjetTrou__usage__46E78A0C");
+                .HasConstraintName("FK__ObjetTrou__usage__45F365D3");
         });
 
         modelBuilder.Entity<Salarie>(entity =>
         {
-            entity.HasKey(e => e.Salarieid).HasName("PK__Salarie__222F82C52571D66B");
+            entity.HasKey(e => e.Salarieid).HasName("PK__Salarie__222F82C5F05E6262");
 
             entity.ToTable("Salarie");
 
@@ -186,12 +188,12 @@ public partial class ObjetContext : DbContext
             entity.HasOne(d => d.Entreprise).WithMany(p => p.Salaries)
                 .HasForeignKey(d => d.Entrepriseid)
                 .OnDelete(DeleteBehavior.ClientSetNull)
-                .HasConstraintName("FK__Salarie__entrepr__3F466844");
+                .HasConstraintName("FK__Salarie__entrepr__3E52440B");
         });
 
         modelBuilder.Entity<Usager>(entity =>
         {
-            entity.HasKey(e => e.Usagerid).HasName("PK__Usager__B5E8521F2C91EDDB");
+            entity.HasKey(e => e.Usagerid).HasName("PK__Usager__B5E8521F6909DD76");
 
             entity.ToTable("Usager");
 

@@ -7,16 +7,9 @@ namespace Objet.Views
         public LocaLostPage(LocaLostViewModel viewModel)
         {
             InitializeComponent();
+            viewModel.Title = "LocaLost";
+            BindingContext = viewModel;
         }
-        //private async void LoginBuisness(object sender, EventArgs e)
-        //{
-        //    await Navigation.PushAsync(new LoginBuiness());
-        //}
-
-        private async void OnQuitterButtonClicked(object sender, EventArgs e)
-        {
-            // Cette méthode permet de revenir à la page précédente
-            Application.Current.Quit();
         }
     }
-}
+

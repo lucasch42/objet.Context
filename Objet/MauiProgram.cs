@@ -18,10 +18,21 @@ namespace Objet
 
             builder.Services.AddSingleton<IDialogService, DialogService>();
             builder.Services.AddSingleton<INavigationService, NavigationService>();
+
+            builder.Services.AddSingleton<LoginBuisnessPage>();
+            builder.Services.AddSingleton<LoginBuisnessViewModel>();
+
             builder.Services.AddSingleton<LocaLostViewModel>();
             builder.Services.AddSingleton<LocaLostPage>();
+
             builder.Services.AddSingleton<LocaLostBuisnessViewModel>();
             builder.Services.AddSingleton<LocaLostBuisnessPage>();
+
+
+
+
+
+
             builder.Services.AddSingleton<SearchViewModel>();
             builder.Services.AddSingleton<SearchPage>();
             builder.Services.AddSingleton<SettingsViewModel>();
