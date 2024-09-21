@@ -47,7 +47,7 @@
                 <Button Text="Vous avez trouvé un objet perdu ?"
                         WidthRequest="350"
                         BackgroundColor="LightGreen"
-                        TextColor="White" 
+                        TextColor="red" 
                        Command="{Binding }"/>
             </StackLayout>
 
